@@ -1,6 +1,6 @@
 import os
 from keras.optimizers import SGD, Adam
-from keras.callbacks import  EarlyStopping, ModelCheckpoint
+from keras.callbacks import  EarlyStopping, ModelCheckpoint, History
 from load_data import load_data_from_npz, load_batch, load_data_names, load_batch_from_names_random
 from models import get_eye_tracker_model
 
@@ -113,6 +113,9 @@ def train(args):
 			val_data[0].shape[0], val_data[1].shape[0], val_data[2].shape[0],
 			val_data[3].shape[0], val_data[4].shape[0]))
 
+
+	self.history = History()
+
 	print ("train_names: ", len(train_names))
 
 	print ("(len(val_names)) / batch_size: ", (len(val_names)) / batch_size)
@@ -125,7 +128,7 @@ def train(args):
 			validation_data=generator_val_data(val_names, dataset_path, batch_size, img_ch, img_cols, img_rows),
 			validation_steps=(len(val_names)) / batch_size,
 			callbacks=[EarlyStopping(patience=patience),
-					   ModelCheckpoint("weights_big/weights.{epoch:03d}-{val_loss:.5f}.hdf5", monitor='val_loss', verbose=1, save_best_only=True, mode='auto', period=0.001)
+					   ModelCheckpoint("weights_big/weights.{epoch:03d}-{val_loss:.5f}.hdf5", monitor='val_loss', verbose=1, save_best_only=True, mode='auto', period=0.001), self.history
 					   ]
 		)
 
