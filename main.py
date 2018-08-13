@@ -2,7 +2,7 @@ import argparse
 from train import train
 # from test_small import test_small
 # from test_big import test_big
-
+import numpy as np
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
@@ -11,7 +11,7 @@ if __name__ == '__main__':
     parser.add_argument('-data', type=str, default='small', help='which dataset, small or big')
     parser.add_argument('-max_epoch', '--max_epoch', type=int, default=1000, help='max number of iterations (default 100)')
     parser.add_argument('-batch_size', type=int, default=100, help='batch size (default 50)')
-    parser.add_argument('-patience', type=int, default=30, help='early stopping patience (default 10)')
+    parser.add_argument('-patience', type=int, default=np.Inf, help='early stopping patience (default 10)')
     parser.add_argument('-dev', type=str, default="-1", help='what cpu or gpu (recommended) use to train the model')
     args = parser.parse_args()
 
