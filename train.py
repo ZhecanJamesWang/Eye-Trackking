@@ -113,6 +113,8 @@ def train(args):
             val_data[0].shape[0], val_data[1].shape[0], val_data[2].shape[0],
             val_data[3].shape[0], val_data[4].shape[0]))
 
+    print ("train_names: ", (len(train_names))
+    raise "debug"
     print ("(len(val_names)) / batch_size: ", (len(val_names)) / batch_size)
     if args.data == "big":
         model.fit_generator(
