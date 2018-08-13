@@ -121,11 +121,11 @@ def train(args):
 			generator=generator_train_data(train_names, dataset_path, batch_size, img_ch, img_cols, img_rows),
 			steps_per_epoch=(len(train_names)) / batch_size,
 			epochs=n_epoch,
-			verbose=2,
+			verbose=1,
 			validation_data=generator_val_data(val_names, dataset_path, batch_size, img_ch, img_cols, img_rows),
 			validation_steps=(len(val_names)) / batch_size,
 			callbacks=[EarlyStopping(patience=patience),
-					   ModelCheckpoint("weights_big/weights.{epoch:03d}-{val_loss:.5f}.hdf5", monitor='val_loss', verbose=1, save_best_only=True, mode='auto', period=0.1)
+					   ModelCheckpoint("weights_big/weights.{epoch:03d}-{val_loss:.5f}.hdf5", monitor='val_loss', verbose=1, save_best_only=True, mode='auto', period=0.001)
 					   ]
 		)
 
