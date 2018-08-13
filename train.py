@@ -1,13 +1,13 @@
 import os
 from keras.optimizers import SGD, Adam
-from keras.callbacks import  EarlyStopping, ModelCheckpoint, History
+from keras.callbacks import  EarlyStopping, ModelCheckpoint, History, Callback
 from load_data import load_data_from_npz, load_batch, load_data_names, load_batch_from_names_random
 from models import get_eye_tracker_model
 
 os.environ["CUDA_VISIBLE-DEVICES"] = "0"
 
 
-class My_Callback(keras.callbacks.Callback):
+class My_Callback(Callback):
 	def on_train_begin(self, logs={}):
 		return
 
