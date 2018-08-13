@@ -8,26 +8,26 @@ os.environ["CUDA_VISIBLE-DEVICES"] = "0"
 
 
 class My_Callback(keras.callbacks.Callback):
-    def on_train_begin(self, logs={}):
-        return
+	def on_train_begin(self, logs={}):
+		return
 
-    def on_train_end(self, logs={}):
-        return
+	def on_train_end(self, logs={}):
+		return
 
-    def on_epoch_begin(self, logs={}):
-        return
+	def on_epoch_begin(self, logs={}):
+		return
 
-    def on_epoch_end(self, epoch, logs={}):
-        return
+	def on_epoch_end(self, epoch, logs={}):
+		return
 
-    def on_batch_begin(self, batch, logs={}):
-        return
+	def on_batch_begin(self, batch, logs={}):
+		return
 
-    def on_batch_end(self, batch, logs={}):
+	def on_batch_end(self, batch, logs={}):
 		print (logs)
-        self.losses.append(logs.get('loss'))
+		self.losses.append(logs.get('loss'))
 		print (self.losses)
-        return
+		return
 
 
 # generator for data loaded from the npz file
