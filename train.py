@@ -114,7 +114,6 @@ def train(args):
 			val_data[3].shape[0], val_data[4].shape[0]))
 
 	print ("train_names: ", len(train_names))
-	raise "debug"
 
 	print ("(len(val_names)) / batch_size: ", (len(val_names)) / batch_size)
 	if args.data == "big":
