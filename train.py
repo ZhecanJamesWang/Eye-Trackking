@@ -90,6 +90,9 @@ def train(args):
 	batch_size = args.batch_size
 	patience = args.patience
 
+	print ("-----------n_epoch------------")
+	print (n_epoch)
+	
 	# image parameter
 	img_cols = 64
 	img_rows = 64
