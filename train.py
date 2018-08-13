@@ -25,8 +25,6 @@ class My_Callback(Callback):
 
 	def on_batch_end(self, batch, logs={}):
 		print (logs)
-		self.losses.append(logs.get('loss'))
-		print (self.losses)
 		return
 
 
