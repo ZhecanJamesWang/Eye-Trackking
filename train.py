@@ -6,6 +6,30 @@ from models import get_eye_tracker_model
 
 os.environ["CUDA_VISIBLE-DEVICES"] = "0"
 
+
+class My_Callback(keras.callbacks.Callback):
+    def on_train_begin(self, logs={}):
+        return
+
+    def on_train_end(self, logs={}):
+        return
+
+    def on_epoch_begin(self, logs={}):
+        return
+
+    def on_epoch_end(self, epoch, logs={}):
+        return
+
+    def on_batch_begin(self, batch, logs={}):
+        return
+
+    def on_batch_end(self, batch, logs={}):
+		print (logs)
+        self.losses.append(logs.get('loss'))
+		print (self.losses)
+        return
+
+
 # generator for data loaded from the npz file
 def generator_npz(data, batch_size, img_ch, img_cols, img_rows):
 
@@ -128,11 +152,12 @@ def train(args):
 			validation_data=generator_val_data(val_names, dataset_path, batch_size, img_ch, img_cols, img_rows),
 			validation_steps=(len(val_names)) / batch_size,
 			callbacks=[EarlyStopping(patience=patience),
-					   ModelCheckpoint("weights_big/weights.{epoch:03d}-{val_loss:.5f}.hdf5", monitor='val_loss', verbose=1, save_best_only=True, mode='auto', period=0.001), self.history
+					   ModelCheckpoint("weights_big/weights.{epoch:03d}-{val_loss:.5f}.hdf5", monitor='val_loss', verbose=1, save_best_only=True, mode='auto', period=0.00001), self.history, My_Callback()
 					   ]
 		)
 
-
+	print ("self.history :")
+	print (self.history)
 
 	if args.data == "small":
 		model.fit_generator(
