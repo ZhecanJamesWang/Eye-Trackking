@@ -9,18 +9,23 @@ os.environ["CUDA_VISIBLE-DEVICES"] = "0"
 
 class My_Callback(Callback):
 	def on_train_begin(self, logs={}):
+		print (logs)
 		return
 
 	def on_train_end(self, logs={}):
+		print (logs)
 		return
 
 	def on_epoch_begin(self, logs={}, *args):
+		print (logs)
 		return
 
 	def on_epoch_end(self, epoch, logs={}):
+		print (logs)
 		return
 
 	def on_batch_begin(self, batch, logs={}):
+		print (logs)
 		return
 
 	def on_batch_end(self, batch, logs={}):
