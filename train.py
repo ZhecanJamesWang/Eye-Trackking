@@ -152,7 +152,7 @@ def train(args):
 			validation_data=generator_val_data(val_names, dataset_path, batch_size, img_ch, img_cols, img_rows),
 			validation_steps=(len(val_names)) / batch_size,
 			callbacks=[EarlyStopping(patience=patience),
-					   ModelCheckpoint("weights_big/weights.{epoch:03d}-{val_loss:.5f}.hdf5", monitor='val_loss', verbose=1, save_best_only=True, mode='auto', period=0.00001), history, My_Callback()
+					   ModelCheckpoint("weights_big/weights.{epoch:03d}-{val_loss:.5f}.hdf5", monitor='val_loss', verbose=1, save_best_only=True, mode='auto', period=0.0001), history, My_Callback()
 					   ]
 		)
 
