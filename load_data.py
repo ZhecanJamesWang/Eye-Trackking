@@ -105,9 +105,9 @@ def load_batch_from_names(names, path, img_ch, img_cols, img_rows):
     save_img = False
 
     # data structures for batches
-    left_eye_batch = np.zeros(shape=(len(names), img_cols, img_rows, img_ch), dtype=np.float32)
-    right_eye_batch = np.zeros(shape=(len(names), img_cols, img_rows, img_ch), dtype=np.float32)
-    face_batch = np.zeros(shape=(len(names), img_cols, img_rows, img_ch), dtype=np.float32)
+    left_eye_batch = np.zeros(shape=(len(names), img_rows, img_ch, img_cols), dtype=np.float32)
+    right_eye_batch = np.zeros(shape=(len(names), img_rows, img_ch, img_cols), dtype=np.float32)
+    face_batch = np.zeros(shape=(len(names), img_rows, img_ch, img_cols), dtype=np.float32)
     face_grid_batch = np.zeros(shape=(len(names), 25, 25, 1), dtype=np.float32)
     y_batch = np.zeros((len(names), 2), dtype=np.float32)
 
