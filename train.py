@@ -118,11 +118,11 @@ def train(args):
 	# todo: parameters not hardocoded
 	if args.data == "big":
 		# train data
-		train_names = load_data_names(train_path)
+		train_names = load_data_names(train_path)[:1000]
 		# validation data
-		val_names = load_data_names(val_path)
+		val_names = load_data_names(val_path)[:1000]
 		# test data
-		test_names = load_data_names(test_path)
+		test_names = load_data_names(test_path)[:1000]
 
 	if args.data == "small":
 		train_data, val_data = load_data_from_npz(dataset_path)
