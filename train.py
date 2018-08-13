@@ -14,7 +14,7 @@ class My_Callback(Callback):
 	def on_train_end(self, logs={}):
 		return
 
-	def on_epoch_begin(self, logs={}):
+	def on_epoch_begin(self, logs={}, args*):
 		return
 
 	def on_epoch_end(self, epoch, logs={}):
