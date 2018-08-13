@@ -98,17 +98,15 @@ def load_data_names(path):
 
     return seq_list
 
-
-# load a batch given a list of names (all images are loaded)
 def load_batch_from_names(names, path, img_ch, img_cols, img_rows):
 
     save_img = False
 
     # data structures for batches
-    left_eye_batch = np.zeros(shape=(len(names), img_rows, img_ch, img_cols), dtype=np.float32)
-    right_eye_batch = np.zeros(shape=(len(names), img_rows, img_ch, img_cols), dtype=np.float32)
-    face_batch = np.zeros(shape=(len(names), img_rows, img_ch, img_cols), dtype=np.float32)
-    face_grid_batch = np.zeros(shape=(len(names), 25, 25, 1), dtype=np.float32)
+    left_eye_batch = np.zeros(shape=(len(names), img_ch, img_cols, img_rows), dtype=np.float32)
+    right_eye_batch = np.zeros(shape=(len(names), img_ch, img_cols, img_rows), dtype=np.float32)
+    face_batch = np.zeros(shape=(len(names), img_ch, img_cols, img_rows), dtype=np.float32)
+    face_grid_batch = np.zeros(shape=(len(names), 1, 25, 25), dtype=np.float32)
     y_batch = np.zeros((len(names), 2), dtype=np.float32)
 
     for i, img_name in enumerate(names):
@@ -178,7 +176,7 @@ def load_batch_from_names(names, path, img_ch, img_cols, img_rows):
         right_eye = img[tl_y:br_y, tl_x:br_x]
 
         # get face grid (in ch, cols, rows convention)
-        face_grid = np.zeros(shape=(25, 25, 1), dtype=np.float32)
+        face_grid = np.zeros(shape=(1, 25, 25), dtype=np.float32)
         tl_x = int(grid_json["X"][idx])
         tl_y = int(grid_json["Y"][idx])
         w = int(grid_json["W"][idx])
@@ -211,9 +209,9 @@ def load_batch_from_names(names, path, img_ch, img_cols, img_rows):
         ######################################################
 
         # transpose images
-        # face = face.transpose(2, 0, 1)
-        # left_eye = left_eye.transpose(2, 0, 1)
-        # right_eye = right_eye.transpose(2, 0, 1)
+        face = face.transpose(2, 0, 1)
+        left_eye = left_eye.transpose(2, 0, 1)
+        right_eye = right_eye.transpose(2, 0, 1)
 
         # check data types
         face = face.astype('float32')
@@ -229,6 +227,7 @@ def load_batch_from_names(names, path, img_ch, img_cols, img_rows):
         y_batch[i][1] = y_y
 
     return [right_eye_batch, left_eye_batch, face_batch, face_grid_batch], y_batch
+
 
 def load_batch_from_data(names, path, batch_size, img_ch, img_cols, img_rows, train_start = None, train_end = None):
 
@@ -380,10 +379,10 @@ def load_batch_from_names_random(names, path, batch_size, img_ch, img_cols, img_
     save_img = False
 
     # data structures for batches
-    left_eye_batch = np.zeros(shape=(batch_size, img_ch, img_cols, img_rows), dtype=np.float32)
-    right_eye_batch = np.zeros(shape=(batch_size, img_ch, img_cols, img_rows), dtype=np.float32)
-    face_batch = np.zeros(shape=(batch_size, img_ch, img_cols, img_rows), dtype=np.float32)
-    face_grid_batch = np.zeros(shape=(batch_size, 1, 25, 25), dtype=np.float32)
+    left_eye_batch = np.zeros(shape=(batch_size, img_cols, img_rows, img_ch), dtype=np.float32)
+    right_eye_batch = np.zeros(shape=(batch_size, img_cols, img_rows, img_ch), dtype=np.float32)
+    face_batch = np.zeros(shape=(batch_size, img_cols, img_rows, img_ch), dtype=np.float32)
+    face_grid_batch = np.zeros(shape=(batch_size, 25, 25, 1), dtype=np.float32)
     y_batch = np.zeros((batch_size, 2), dtype=np.float32)
 
     # counter for check the size of loading batch
@@ -463,7 +462,7 @@ def load_batch_from_names_random(names, path, batch_size, img_ch, img_cols, img_
         right_eye = img[tl_y:br_y, tl_x:br_x]
 
         # get face grid (in ch, cols, rows convention)
-        face_grid = np.zeros(shape=(1, 25, 25), dtype=np.float32)
+        face_grid = np.zeros(shape=(25, 25, 1), dtype=np.float32)
         tl_x = int(grid_json["X"][idx])
         tl_y = int(grid_json["Y"][idx])
         w = int(grid_json["W"][idx])
@@ -496,9 +495,9 @@ def load_batch_from_names_random(names, path, batch_size, img_ch, img_cols, img_
         ######################################################
 
         # transpose images
-        face = face.transpose(2, 0, 1)
-        left_eye = left_eye.transpose(2, 0, 1)
-        right_eye = right_eye.transpose(2, 0, 1)
+        # face = face.transpose(2, 0, 1)
+        # left_eye = left_eye.transpose(2, 0, 1)
+        # right_eye = right_eye.transpose(2, 0, 1)
 
         # check data types
         face = face.astype('float32')
