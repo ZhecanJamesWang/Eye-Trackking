@@ -30,6 +30,14 @@ def generator_val_data(names, path, batch_size, img_ch, img_cols, img_rows):
         x, y = load_batch_from_names_random(names, path, batch_size, img_ch, img_cols, img_rows)
         yield x, y
 
+def save_model(model):
+    # serialize model to JSON
+    model_json = model.to_json()
+    with open("model.json", "w") as json_file:
+        json_file.write(model_json)
+    # serialize weights to HDF5
+    model.save_weights("model.h5")
+    print("Saved model to disk")
 
 def train(args):
 
@@ -113,13 +121,13 @@ def train(args):
             epochs=n_epoch,
             verbose=1,
             validation_data=generator_val_data(val_names, dataset_path, batch_size, img_ch, img_cols, img_rows),
-            validation_steps=(len(val_names)) / batch_size
+            validation_steps=(len(val_names)) / batch_size,
+            callbacks=[EarlyStopping(patience=patience),
+                       ModelCheckpoint("weights_big/weights.{epoch:03d}-{val_loss:.5f}.hdf5", save_best_only=True)
+                       ]
         )
 
-        # ,
-        # callbacks=[EarlyStopping(patience=patience),
-        #            ModelCheckpoint("weights_big/weights.{epoch:03d}-{val_loss:.5f}.hdf5", save_best_only=True)
-        #            ]
+
 
     if args.data == "small":
         model.fit_generator(
