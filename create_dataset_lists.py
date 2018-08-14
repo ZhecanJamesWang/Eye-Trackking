@@ -8,8 +8,8 @@ import argparse
 def create_dataset_lists(args):
 
     # read args from main (input and output)
-    dataset_path = "GazeCapture"
-    output_root = "GazeCapture"
+    dataset_path = "GazeCapture/"
+    output_root = "GazeCapture/"
 
     # read all sequence directories (starting with a number)
     dirs = sorted(glob.glob(join(dataset_path, "0*")))
@@ -23,11 +23,11 @@ def create_dataset_lists(args):
         print("analyzing {}".format(dir))
 
         # open json files
-        face_file = open(join(dataset_path, dir, "appleFace.json"))
-        left_file = open(join(dataset_path, dir, "appleLeftEye.json"))
-        right_file = open(join(dataset_path, dir, "appleRightEye.json"))
-        frames_file = open(join(dataset_path, dir, "frames.json"))
-        info_file = open(join(dataset_path, dir, "info.json"))
+        face_file = open(join(dir, "appleFace.json"))
+        left_file = open(join(dir, "appleLeftEye.json"))
+        right_file = open(join(dir, "appleRightEye.json"))
+        frames_file = open(join(dir, "frames.json"))
+        info_file = open(join(dir, "info.json"))
 
         # read json content
         face_json = json.load(face_file)
