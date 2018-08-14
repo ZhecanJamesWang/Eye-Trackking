@@ -134,6 +134,8 @@ def train(args):
 	# x, y = load_batch([l[0:batch_size] for l in train_data], img_ch, img_cols, img_rows)
 	# x, y = load_batch_from_names(train_names[0:batch_size], dataset_path, img_ch, img_cols, img_rows)
 
+	print ("train_data.shape: ", train_data.shape)
+	
 	# last dataset checks
 	if args.data == "small":
 		print("train data sources of size: {} {} {} {} {}".format(
