@@ -184,7 +184,7 @@ def train(args):
 			validation_data=generator_npz(val_data, batch_size, img_ch, img_cols, img_rows),
 			validation_steps=(val_data[0].shape[0])/batch_size,
 			callbacks=[EarlyStopping(patience=patience),
-					   ModelCheckpoint("weights/weights.{epoch:03d}-{val_loss:.5f}.hdf5", save_best_only=True)
+					   ModelCheckpoint("weights_small/weights.{epoch:03d}-{val_loss:.5f}.hdf5", save_best_only=True)
 					   ]
 		)
 
