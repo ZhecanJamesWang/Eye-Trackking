@@ -146,11 +146,12 @@ def train(args):
 
 	history = History()
 
-	print ("train_names: ", len(train_names))
-
-	print ("(len(val_names)) / batch_size: ", (len(val_names)) / batch_size)
 
 	if args.data == "big":
+    	print ("train_names: ", len(train_names))
+
+    	print ("(len(val_names)) / batch_size: ", (len(val_names)) / batch_size)
+
 		model.fit_generator(
 			generator=generator_train_data(train_names, dataset_path, batch_size, img_ch, img_cols, img_rows),
 			steps_per_epoch=(len(train_names)) / batch_size,
@@ -163,8 +164,7 @@ def train(args):
 					   ]
 		)
 
-	print ("history :")
-	print (history)
+
 
 	if args.data == "small":
 		model.fit_generator(
@@ -178,3 +178,6 @@ def train(args):
 					   ModelCheckpoint("weights/weights.{epoch:03d}-{val_loss:.5f}.hdf5", save_best_only=True)
 					   ]
 		)
+
+	print ("history :")
+	print (history)
