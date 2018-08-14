@@ -8,8 +8,8 @@ import argparse
 def create_dataset_lists(args):
 
     # read args from main (input and output)
-    dataset_path = args.input
-    output_root = args.output
+    dataset_path = "GazeCapture"
+    output_root = "GazeCapture"
 
     # read all sequence directories (starting with a number)
     dirs = sorted(glob.glob(join(dataset_path, "0*")))
