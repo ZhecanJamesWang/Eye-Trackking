@@ -40,10 +40,10 @@ def load_batch(data, img_ch, img_cols, img_rows):
             os.makedir(img_dir)
 
     # create batch structures
-    left_eye_batch = np.zeros(shape=(data[0].shape[0], img_ch, img_cols, img_rows), dtype=np.float32)
-    right_eye_batch = np.zeros(shape=(data[0].shape[0], img_ch, img_cols, img_rows), dtype=np.float32)
-    face_batch = np.zeros(shape=(data[0].shape[0], img_ch, img_cols, img_rows), dtype=np.float32)
-    face_grid_batch = np.zeros(shape=(data[0].shape[0], 1, 25, 25), dtype=np.float32)
+    left_eye_batch = np.zeros(shape=(data[0].shape[0], img_cols, img_rows, img_ch), dtype=np.float32)
+    right_eye_batch = np.zeros(shape=(data[0].shape[0], img_cols, img_rows, img_ch), dtype=np.float32)
+    face_batch = np.zeros(shape=(data[0].shape[0], img_cols, img_rows, img_ch), dtype=np.float32)
+    face_grid_batch = np.zeros(shape=(data[0].shape[0], 25, 25, 1), dtype=np.float32)
     y_batch = np.zeros((data[0].shape[0], 2), dtype=np.float32)
 
     # load left eye
@@ -52,7 +52,8 @@ def load_batch(data, img_ch, img_cols, img_rows):
         if save_images:
             cv2.imwrite(join(img_dir, "left" + str(i) + ".png"), img)
         img = image_normalization(img)
-        left_eye_batch[i] = img.transpose(2, 0, 1)
+        left_eye_batch[i] = img
+        # left_eye_batch[i] = img.transpose(2, 0, 1)
 
     # load right eye
     for i, img in enumerate(data[1]):
@@ -60,7 +61,8 @@ def load_batch(data, img_ch, img_cols, img_rows):
         if save_images:
             cv2.imwrite("images/right" + str(i) + ".png", img)
         img = image_normalization(img)
-        right_eye_batch[i] = img.transpose(2, 0, 1)
+        right_eye_batch[i] = img
+        # right_eye_batch[i] = img.transpose(2, 0, 1)
 
     # load faces
     for i, img in enumerate(data[2]):
@@ -68,13 +70,14 @@ def load_batch(data, img_ch, img_cols, img_rows):
         if save_images:
             cv2.imwrite("images/face" + str(i) + ".png", img)
         img = image_normalization(img)
-        face_batch[i] = img.transpose(2, 0, 1)
+        face_batch[i] = img
+        # face_batch[i] = img.transpose(2, 0, 1)
 
     # load grid faces
     for i, img in enumerate(data[3]):
         if save_images:
             cv2.imwrite("images/grid" + str(i) + ".png", img)
-        face_grid_batch[i] = img.reshape((1, img.shape[0], img.shape[1]))
+        face_grid_batch[i] = img.reshape((img.shape[0], img.shape[1], 1))
 
     # load labels
     for i, labels in enumerate(data[4]):
