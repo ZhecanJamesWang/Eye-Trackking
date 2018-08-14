@@ -121,7 +121,7 @@ def train(args):
 	# todo: parameters not hardocoded
 	if args.data == "big":
 		# train data
-		train_names = load_data_names(train_path)[:1000]
+		train_names = load_data_names(train_path)[:3000]
 		# validation data
 		val_names = load_data_names(val_path)[:500]
 		# test data
@@ -134,6 +134,7 @@ def train(args):
 	# x, y = load_batch([l[0:batch_size] for l in train_data], img_ch, img_cols, img_rows)
 	# x, y = load_batch_from_names(train_names[0:batch_size], dataset_path, img_ch, img_cols, img_rows)
 
+	train_data, val_data = train_data[:1000], val_data[:500]
 	print ("train_data.shape: ")
 	print (len(train_data))
 	print (train_data[-5].shape)
