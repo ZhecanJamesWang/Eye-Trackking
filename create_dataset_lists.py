@@ -67,8 +67,8 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description="Create dataset names for train, validation and test.")
 
-    parser.add_argument('-i', '-input', type=str, required=True, help="Directory wich contains the unzipped dataset.")
-    parser.add_argument('-o','-output', type=str, required=True, help="Ouptut directory")
+    parser.add_argument('-i', '-input', type=str, required=False, help="Directory wich contains the unzipped dataset.")
+    parser.add_argument('-o','-output', type=str, required=False, help="Ouptut directory")
     args = parser.parse_args()
 
     create_dataset_lists(args)
