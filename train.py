@@ -148,9 +148,9 @@ def train(args):
 
 
 	if args.data == "big":
-    	print ("train_names: ", len(train_names))
+		print ("train_names: ", len(train_names))
 
-    	print ("(len(val_names)) / batch_size: ", (len(val_names)) / batch_size)
+		print ("(len(val_names)) / batch_size: ", (len(val_names)) / batch_size)
 
 		model.fit_generator(
 			generator=generator_train_data(train_names, dataset_path, batch_size, img_ch, img_cols, img_rows),
