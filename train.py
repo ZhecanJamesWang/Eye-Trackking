@@ -76,7 +76,7 @@ def train(args):
 	if args.data == "big":
 		dataset_path = "Gazecapture/"
 	if args.data == "small":
-		dataset_path = "/cvgl/group/GazeCapture/eye_tracker_train_and_val.npz"
+		dataset_path = "eye_tracker_train_and_val.npz"
 
 	if args.data == "big":
 		train_path = "GazeCapture/train"
@@ -92,7 +92,7 @@ def train(args):
 
 	print ("-----------n_epoch------------")
 	print (n_epoch)
-	
+
 	# image parameter
 	img_cols = 64
 	img_rows = 64
